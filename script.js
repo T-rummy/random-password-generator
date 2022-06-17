@@ -7,17 +7,13 @@ var generatePassword = function(){
  var specialChar = ["#$%+-?,@,^,|,~"];
 
  var rndnum = 0;
-
-
- var characterAmount = window.prompt = parseInt(prompt("How many charcters between 8 - 128 would you like your password to be?"));
-
-while (characterAmount < 8 || characterAmount > 128) {
- window.alert("That character amount does not fit what we allow, please refresh the page and submit an amount between 8 -128");
- var characterAmount = window.prompt = parseInt(prompt("How many charcters between 8 - 128 would you like your password to be?"));
-break;
-}
-
-
+ var characterAmount = window.prompt("How many charcters between 8 - 128 would you like your password to be?");
+ if (characterAmount > 128 || characterAmount < 8) {
+   window.alert("That character amount is not allowed, please try again.")
+   return generatePassword();
+ }; 
+ 
+ 
  var lowerConfirm = window.confirm("Do you want to allow lower case?");
  var upperConfirm = window.confirm("Do you want to allow upper case?");
  var specialConfirm = window.confirm("Do you want to allow special characters?");
@@ -42,27 +38,30 @@ break;
  if (specialConfirm) {
    finalPassword += specialChar;
  }
-var randomNumber = function(){
+
+
+ var randomNumber = function(){
  rndnum = Math.floor(Math.random() * (finalPassword.length));
 console.log(rndnum);
  return rndnum;
 }
- var random = finalPassword[randomNumber()];
-//var random = Math.floor(Math.random() * finalPassword.length);
+ 
+var random = finalPassword[randomNumber()];
+
 
 console.log(finalPassword.length);  
 for(var i = 1; i <= characterAmount; i++) {
  
  
-  //console.log(finalPassword[i]);
+  
   tempPassword += random;
   console.log(tempPassword);
  
   
-  //random = (random, finalPassword[random]);
+  
   
   random = finalPassword[randomNumber()];
-  //var random = Math.floor(Math.random());
+  
   
 
 };
@@ -70,13 +69,18 @@ for(var i = 1; i <= characterAmount; i++) {
 return tempPassword;
 }
 
+  
+    
+  
+
+
 
 
  
-// Get references to the #generate element
+
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+
 function writePassword() {
   
   var password = generatePassword();
